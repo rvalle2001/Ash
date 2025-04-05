@@ -193,40 +193,22 @@
   </audio>
 </section>
 
-<button id="audio-control">Pausar música</button>
+<button id="audio-control">Reproducir música</button>
 
 <footer>Hecho con amor para ti</footer>
 
-<audio id="bg-music" autoplay loop>
-  <source src="/musica/inicio.mp3" type="audio/mpeg">
+<audio id="bg-music" loop>
+  <source src="https://github.com/usuario/repo/raw/main/musica/inicio.mp3" type="audio/mpeg">
   Tu navegador no soporta audio HTML5.
 </audio>
 
 <script>
   function cerrarModal() {
     document.getElementById("bienvenida").style.display = "none";
-    // Guardar en localStorage que el modal ya fue cerrado
-    localStorage.setItem("modalCerrado", "true");
   }
-
-  window.addEventListener("load", () => {
-    // Verificar si el modal ya fue cerrado previamente
-    if (localStorage.getItem("modalCerrado") === "true") {
-      document.getElementById("bienvenida").style.display = "none";
-    }
-  });
 
   const music = document.getElementById("bg-music");
   const btn = document.getElementById("audio-control");
-
-  const musicTracks = {
-    inicio: "/musica/inicio.mp3",
-    poemas: "/musica/poemas.mp3",
-    dibujos: "/musica/dibujos.mp3",
-    mensajes: "/musica/mensajes.mp3"
-  };
-
-  let currentSection = "inicio";
 
   btn.addEventListener("click", () => {
     if (music.paused) {
@@ -237,6 +219,15 @@
       btn.textContent = "Reproducir música";
     }
   });
+
+  const musicTracks = {
+    inicio: "https://github.com/usuario/repo/raw/main/musica/inicio.mp3",
+    poemas: "https://github.com/usuario/repo/raw/main/musica/poemas.mp3",
+    dibujos: "https://github.com/usuario/repo/raw/main/musica/dibujos.mp3",
+    mensajes: "https://github.com/usuario/repo/raw/main/musica/mensajes.mp3"
+  };
+
+  let currentSection = "inicio";
 
   function showSection(id) {
     document.querySelectorAll("section").forEach(sec => {
