@@ -257,25 +257,39 @@
   window.addEventListener("load", () => {
     const id = location.hash.replace("#", "") || "inicio";
     showSection(id);
+    loadPoemas();
   });
 
-  // Cargar los poemas desde el archivo JSON
-  fetch('poemas.json')
-    .then(response => response.json())
-    .then(poemas => {
-      const container = document.getElementById('poemas-container');
+  function loadPoemas() {
+    fetch('poemas.json')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Error al cargar el archivo JSON');
+        }
+        return response.json();
+      })
+      .then(poemas => {
+        const container = document.getElementById('poemas-container');
+        if (poemas.length === 0) {
+          container.innerHTML = '<p>No hay poemas disponibles.</p>';
+          return;
+        }
 
-      poemas.forEach(poema => {
-        const poemaElement = document.createElement('div');
-        poemaElement.classList.add('poema');
-        poemaElement.innerHTML = `
-          <h3>${poema.titulo}</h3>
-          <p>${poema.contenido}</p>
-        `;
-        container.appendChild(poemaElement);
+        poemas.forEach(poema => {
+          const poemaElement = document.createElement('div');
+          poemaElement.classList.add('poema');
+          poemaElement.innerHTML = `
+            <h3>${poema.titulo}</h3>
+            <p>${poema.contenido}</p>
+          `;
+          container.appendChild(poemaElement);
+        });
+      })
+      .catch(error => {
+        console.error('Error cargando los poemas:', error);
+        document.getElementById('poemas-container').innerHTML = '<p>No se pudieron cargar los poemas.</p>';
       });
-    })
-    .catch(error => console.error('Error cargando los poemas:', error));
+  }
 </script>
 
 </body>
