@@ -44,35 +44,26 @@
 <header>Poemas para Ti</header>
 
 <div id="poemas-container">
-  <!-- Los poemas se cargarán aquí -->
+  <!-- Poema 1 -->
+  <div class="poema">
+    <h3>Poema 1: Mi amor por ti</h3>
+    <p>Desde el primer día que te vi, supe que serías el sol de mis días. Mi corazón late más rápido cada vez que te veo, y mi alma se llena de paz solo con tu presencia.</p>
+  </div>
+
+  <!-- Poema 2 -->
+  <div class="poema">
+    <h3>Poema 2: Eres mi razón</h3>
+    <p>Tu risa es la melodía más hermosa, y tus ojos son las estrellas que iluminan mi vida. No existe un día en que no me sienta agradecido por tenerte a mi lado.</p>
+  </div>
+
+  <!-- Poema 3 -->
+  <div class="poema">
+    <h3>Poema 3: En tus brazos</h3>
+    <p>En tus brazos encuentro mi refugio, el lugar donde todo tiene sentido. No necesito nada más cuando estoy contigo, solo tus abrazos y tu amor eterno.</p>
+  </div>
+  
+  <!-- Puedes agregar más poemas aquí de manera similar -->
 </div>
-
-<script>
-  // Cargar los poemas desde el archivo JSON (asegurándote de que el archivo esté en la misma carpeta que este HTML)
-  fetch('poemas.json')
-    .then(response => response.json())
-    .then(poemas => {
-      const container = document.getElementById('poemas-container');
-      if (poemas.length === 0) {
-        container.innerHTML = '<p>No hay poemas disponibles.</p>';
-        return;
-      }
-
-      poemas.forEach(poema => {
-        const poemaElement = document.createElement('div');
-        poemaElement.classList.add('poema');
-        poemaElement.innerHTML = `
-          <h3>${poema.titulo}</h3>
-          <p>${poema.contenido}</p>
-        `;
-        container.appendChild(poemaElement);
-      });
-    })
-    .catch(error => {
-      console.error('Error cargando los poemas:', error);
-      document.getElementById('poemas-container').innerHTML = '<p>No se pudieron cargar los poemas.</p>';
-    });
-</script>
 
 </body>
 </html>
