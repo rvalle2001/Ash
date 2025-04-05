@@ -168,13 +168,8 @@
 
 <section id="poemas">
   <h2>Poemas</h2>
-  <div class="poema" onclick="togglePoema(this)">
-    <h3>Tu Sonrisa</h3>
-    <p>Tu sonrisa ilumina mis días como el sol tras la lluvia, cálida, tierna y eterna.</p>
-  </div>
-  <div class="poema" onclick="togglePoema(this)">
-    <h3>Versos para Ti</h3>
-    <p>Cada verso que escribo nace de ti, de tu mirada, de tu risa, de lo que me haces sentir.</p>
+  <div id="poemas-container">
+    <!-- Los poemas se cargarán aquí -->
   </div>
 </section>
 
@@ -263,6 +258,24 @@
     const id = location.hash.replace("#", "") || "inicio";
     showSection(id);
   });
+
+  // Cargar los poemas desde el archivo JSON
+  fetch('poemas.json')
+    .then(response => response.json())
+    .then(poemas => {
+      const container = document.getElementById('poemas-container');
+
+      poemas.forEach(poema => {
+        const poemaElement = document.createElement('div');
+        poemaElement.classList.add('poema');
+        poemaElement.innerHTML = `
+          <h3>${poema.titulo}</h3>
+          <p>${poema.contenido}</p>
+        `;
+        container.appendChild(poemaElement);
+      });
+    })
+    .catch(error => console.error('Error cargando los poemas:', error));
 </script>
 
 </body>
