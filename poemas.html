@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Poemas</title>
+  <style>
+    body {
+      font-family: Verdana, sans-serif;
+      background: #ffeef2;
+      margin: 0;
+      padding: 0;
+      color: #444;
+    }
+    header {
+      background: #f9c6d4;
+      padding: 1em;
+      text-align: center;
+      color: white;
+      font-size: 1.5em;
+      border-radius: 0 0 20px 20px;
+    }
+    .poema {
+      background: #fff8fb;
+      border: 1px solid #f2d1db;
+      border-radius: 10px;
+      margin: 1em 0;
+      padding: 1em;
+      cursor: pointer;
+      box-shadow: 1px 1px 5px rgba(0,0,0,0.05);
+      transition: background 0.3s ease;
+    }
+    .poema h3 {
+      margin: 0;
+      color: #d04e6d;
+    }
+    .poema p {
+      margin-top: 0.5em;
+    }
+  </style>
+</head>
+<body>
+
+<header>Poemas para Ti</header>
+
+<div id="poemas-container">
+  <!-- Los poemas se cargarán aquí -->
+</div>
+
+<script>
+  // Cargar los poemas desde el archivo JSON (asegurándote de que el archivo esté en la misma carpeta que este HTML)
+  fetch('poemas.json')
+    .then(response => response.json())
+    .then(poemas => {
+      const container = document.getElementById('poemas-container');
+      if (poemas.length === 0) {
+        container.innerHTML = '<p>No hay poemas disponibles.</p>';
+        return;
+      }
+
+      poemas.forEach(poema => {
+        const poemaElement = document.createElement('div');
+        poemaElement.classList.add('poema');
+        poemaElement.innerHTML = `
+          <h3>${poema.titulo}</h3>
+          <p>${poema.contenido}</p>
+        `;
+        container.appendChild(poemaElement);
+      });
+    })
+    .catch(error => {
+      console.error('Error cargando los poemas:', error);
+      document.getElementById('poemas-container').innerHTML = '<p>No se pudieron cargar los poemas.</p>';
+    });
+</script>
+
+</body>
+</html>
