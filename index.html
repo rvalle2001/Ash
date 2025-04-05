@@ -205,7 +205,16 @@
 <script>
   function cerrarModal() {
     document.getElementById("bienvenida").style.display = "none";
+    // Guardar en localStorage que el modal ya fue cerrado
+    localStorage.setItem("modalCerrado", "true");
   }
+
+  window.addEventListener("load", () => {
+    // Verificar si el modal ya fue cerrado previamente
+    if (localStorage.getItem("modalCerrado") === "true") {
+      document.getElementById("bienvenida").style.display = "none";
+    }
+  });
 
   const music = document.getElementById("bg-music");
   const btn = document.getElementById("audio-control");
@@ -267,4 +276,3 @@
 
 </body>
 </html>
-
