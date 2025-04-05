@@ -137,6 +137,25 @@
       margin: 1em auto;
       text-align: center;
     }
+    /* Estilos para la Galería de Dibujos */
+    #dibujos {
+      text-align: center;
+    }
+    
+    .galeria {
+      display: flex;
+      justify-content: center;
+      gap: 1em;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    
+    .galeria img {
+      max-width: 100%;
+      height: auto;
+      max-height: 400px;
+      border-radius: 10px;
+    }
   </style>
 </head>
 <body>
@@ -180,8 +199,10 @@
 
 <section id="dibujos">
   <h2>Galería de Dibujos</h2>
-  <img src="imagenes/dibujo1.jpg" alt="Dibujo 1" style="max-width: 100%; border-radius: 10px; margin-bottom: 1em;">
-  <img src="imagenes/dibujo2.jpg" alt="Dibujo 2" style="max-width: 100%; border-radius: 10px; margin-bottom: 1em;">
+  <div class="galeria">
+    <img src="imagenes/dibujo1.jpg" alt="Dibujo 1">
+    <img src="imagenes/dibujo2.jpg" alt="Dibujo 2">
+  </div>
 </section>
 
 <section id="mensajes">
