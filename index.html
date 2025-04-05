@@ -11,7 +11,6 @@
       margin: 0;
       padding: 0;
       color: #444;
-      transition: background-color 1s;
     }
     header {
       background: #f9c6d4;
@@ -33,47 +32,9 @@
       color: #d04e6d;
       text-decoration: none;
       font-weight: bold;
-      transition: transform 0.2s;
-    }
-    nav a:hover {
-      transform: scale(1.1);
     }
     section {
       padding: 2em;
-      display: none;
-    }
-    section.active {
-      display: block;
-      animation: fadeIn 1s ease-in;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-    #bienvenida {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(255, 240, 246, 0.95);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      z-index: 999;
-    }
-    #bienvenida h2 {
-      font-size: 2em;
-      color: #d04e6d;
-    }
-    #bienvenida button {
-      padding: 0.8em 1.5em;
-      border: none;
-      border-radius: 10px;
-      background-color: #f9a8c1;
-      color: white;
-      font-size: 1em;
-      margin-top: 1em;
-      cursor: pointer;
     }
     footer {
       text-align: center;
@@ -81,96 +42,22 @@
       font-size: 0.9em;
       color: #888;
     }
-    #audio-control {
-      position: fixed;
-      bottom: 10px;
-      right: 10px;
-      background: #f9c6d4;
-      color: white;
-      border: none;
-      padding: 0.6em 1em;
-      border-radius: 20px;
-      cursor: pointer;
-      z-index: 1000;
-    }
-    .inicio-link {
-      background: white;
-      border-radius: 15px;
-      padding: 1em;
-      text-align: center;
-      text-decoration: none;
-      color: #444;
-      width: 180px;
-      box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
-      transition: transform 0.3s, background 0.3s;
-    }
-    .inicio-link:hover {
-      transform: translateY(-5px);
-      background: #ffeef2;
-    }
-    .inicio-icon {
-      font-size: 2.5em;
-      margin-bottom: 0.5em;
-      display: block;
-    }
-    .poema {
-      background: #fff8fb;
-      border: 1px solid #f2d1db;
-      border-radius: 10px;
-      margin: 1em 0;
-      padding: 1em;
-      cursor: pointer;
-      box-shadow: 1px 1px 5px rgba(0,0,0,0.05);
-      transition: background 0.3s ease;
-    }
-    .poema h3 {
-      margin: 0;
-      color: #d04e6d;
-    }
-    .poema p {
-      margin-top: 0.5em;
-      display: none;
-      opacity: 0;
-      transition: opacity 0.5s ease;
-    }
-    .poema.open p {
-      display: block;
-      opacity: 1;
-    }
   </style>
 </head>
 <body>
-
-<div id="bienvenida">
-  <h2>Bienvenida, mi amor</h2>
-  <p>He creado este espacio solo para ti, con todo mi corazón.</p>
-  <button onclick="cerrarModal()">Entrar</button>
-</div>
 
 <header>Para Ti</header>
 
 <nav>
   <a href="#inicio">Inicio</a>
-  <a href="#poemas">Poemas</a>
+  <a href="poemas.html">Poemas</a>
   <a href="#dibujos">Galería de Dibujos</a>
   <a href="#mensajes">Mensajes Especiales</a>
 </nav>
 
-<section id="inicio" class="active">
+<section id="inicio">
   <h2>Bienvenida, mi amor</h2>
   <p>Este es tu espacio especial, creado con todo mi cariño. Toca una de las secciones para descubrir lo que tengo para ti.</p>
-  <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 2em; margin-top: 2em;">
-    <a class="inicio-link" href="#poemas"><span class="inicio-icon">📜</span>Poemas</a>
-    <a class="inicio-link" href="#dibujos"><span class="inicio-icon">🎨</span>Dibujos</a>
-    <a class="inicio-link" href="#mensajes"><span class="inicio-icon">💌</span>Mensajes</a>
-  </div>
-</section>
-
-<section id="poemas">
-  <h2>Poemas</h2>
-  <div id="poemas-container">
-    <!-- Los poemas se cargarán aquí -->
-  </div>
 </section>
 
 <section id="dibujos">
@@ -182,115 +69,9 @@
 <section id="mensajes">
   <h2>Mensajes Especiales</h2>
   <p>Palabras que vienen directamente de mi corazón.</p>
-  <audio controls>
-    <source src="mensajes/mensaje1.mp3" type="audio/mpeg">
-    Tu navegador no soporta audio HTML5.
-  </audio>
 </section>
 
-<button id="audio-control">Pausar música</button>
-
 <footer>Hecho con amor para ti</footer>
-
-<audio id="bg-music" autoplay loop>
-  <source src="/musica/inicio.mp3" type="audio/mpeg">
-  Tu navegador no soporta audio HTML5.
-</audio>
-
-<script>
-  function cerrarModal() {
-    document.getElementById("bienvenida").style.display = "none";
-  }
-
-  const music = document.getElementById("bg-music");
-  const btn = document.getElementById("audio-control");
-
-  const musicTracks = {
-    inicio: "/musica/inicio.mp3",
-    poemas: "/musica/poemas.mp3",
-    dibujos: "/musica/dibujos.mp3",
-    mensajes: "/musica/mensajes.mp3"
-  };
-
-  let currentSection = "inicio";
-
-  btn.addEventListener("click", () => {
-    if (music.paused) {
-      music.play();
-      btn.textContent = "Pausar música";
-    } else {
-      music.pause();
-      btn.textContent = "Reproducir música";
-    }
-  });
-
-  function showSection(id) {
-    document.querySelectorAll("section").forEach(sec => {
-      sec.classList.remove("active");
-    });
-    const section = document.getElementById(id);
-    if (section) {
-      section.classList.add("active");
-    }
-
-    if (musicTracks[id] && id !== currentSection) {
-      music.src = musicTracks[id];
-      music.play();
-      btn.textContent = "Pausar música";
-      currentSection = id;
-    }
-  }
-
-  function togglePoema(element) {
-    const isOpen = element.classList.contains("open");
-    document.querySelectorAll(".poema").forEach(p => p.classList.remove("open"));
-    if (!isOpen) {
-      element.classList.add("open");
-    }
-  }
-
-  window.addEventListener("hashchange", () => {
-    const id = location.hash.replace("#", "") || "inicio";
-    showSection(id);
-  });
-
-  window.addEventListener("load", () => {
-    const id = location.hash.replace("#", "") || "inicio";
-    showSection(id);
-    loadPoemas();
-  });
-
-  function loadPoemas() {
-    fetch('poemas.json')
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Error al cargar el archivo JSON');
-        }
-        return response.json();
-      })
-      .then(poemas => {
-        const container = document.getElementById('poemas-container');
-        if (poemas.length === 0) {
-          container.innerHTML = '<p>No hay poemas disponibles.</p>';
-          return;
-        }
-
-        poemas.forEach(poema => {
-          const poemaElement = document.createElement('div');
-          poemaElement.classList.add('poema');
-          poemaElement.innerHTML = `
-            <h3>${poema.titulo}</h3>
-            <p>${poema.contenido}</p>
-          `;
-          container.appendChild(poemaElement);
-        });
-      })
-      .catch(error => {
-        console.error('Error cargando los poemas:', error);
-        document.getElementById('poemas-container').innerHTML = '<p>No se pudieron cargar los poemas.</p>';
-      });
-  }
-</script>
 
 </body>
 </html>
